@@ -1,0 +1,11 @@
+etl:
+  raw_data_path: "./data/autos.csv"
+  processed_path: "./data"
+
+log:
+  log_path : "./log/etl.log"
+
+plots:
+  plot1_path: "./visualizations/plot1.png"
+  plot2_path: "./visualizations/plot2.png"
+  plot3_path: "./visualizations/plot3.png"
