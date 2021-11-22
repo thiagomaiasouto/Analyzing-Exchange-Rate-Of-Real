@@ -23,7 +23,7 @@ This repository contains a data analysis tool that perform ETL operations and pr
 4. Run the code in the terminal
    
    ```
-   python ./scripts/etl.py
+   python run.py
    ```
 
 5. To execute pylint and analyze the code format

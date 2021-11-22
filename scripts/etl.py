@@ -2,15 +2,17 @@
 to make all transformations in the dataframe and create and export
 the plots
 """
-import pandas as pd
-import numpy as np
 from typing import List
 from pathlib import Path
 import logging
+import pandas as pd
 from .utils import set_logger, parse_config
 
 
 class ExchangeETL():
+    """
+    This class implements a ETL pipeline
+    """
 
     config_path: str
     data_path: str
@@ -48,6 +50,16 @@ class ExchangeETL():
         self.dataframes = [pd.DataFrame() for i in range(3)]
 
     def load_dataframe(self, index: int, data_path: str) -> bool:
+        """
+        This function is responsible to validate the inputs, for
+        load the dataframe in a attribute and returns True if
+        executes successfully;
+        Args:
+            index (int): index for indentifie the dataframe in the dataframe list.
+            data_path (str): indicates the path for the dataframe.
+        Returns:
+            bool: indicates if the function worked well or not.
+        """
         try:
             assert isinstance(data_path, str)
             self.dataframes[index] = pd.read_csv(data_path)
@@ -60,6 +72,16 @@ class ExchangeETL():
             return False
 
     def rename_columns(self, index: int, columns: dict) -> bool:
+        """
+        This function is responsible to validate the inputs, for
+        rename columns of a dataframe and returns True if
+        executes successfully;
+        Args:
+            index (int): index for indentifie the dataframe in the dataframe list.
+            columns (dict): indicates the columns will be renamed.
+        Returns:
+            bool: indicates if the function worked well or not.
+        """
         try:
             assert isinstance(columns, dict)
             self.dataframes[index].rename(columns=columns, inplace=True)
@@ -69,22 +91,36 @@ class ExchangeETL():
             self.logger.warning("The column's names was not changed.")
             return False
 
-    def change_column_type(self, index: int, column: str, type: str) -> None:
+    def change_column_type(self, index: int, column: str, dtype: str) -> None:
+        """
+        This function is responsible to validate the inputs, for
+        change the column type of a dataframe and returns True if
+        executes successfully;
+        Args:
+            index (int): index for indentifie the dataframe in the dataframe list.
+            column (str): specify what column will be changed.
+            type (str): indicates the new type of the column
+        Returns:
+            bool: indicates if the function worked well or not.
+        """
         try:
-            if type == 'datetime':
+            if dtype == 'datetime':
                 self.dataframes[index][column] = pd.to_datetime(
                     self.dataframes[index][column])
                 return True
+
+            self.logger.warning("The type used was not valid")
+            return False
         except Exception as exception:
             self.logger.error("%s", exception)
             self.logger.warning(
-                "The change in the column type was not performed", type)
+                "The change in the column type was not performed")
             return False
 
     def processing(self) -> None:
         """
         This method implements the processing pipeline for the ETL operations
-        and visualizations plot.
+        and export the processed dataframe
         """
 
         # beginning the data transformation
@@ -177,7 +213,7 @@ class ExchangeETL():
             [self.dataframes[0], self.dataframes[1]])
         self.logger.info(
             "The dataframe0 and dataframe1 was concatenated in dataframe2.")
-        
+
         # filtering dates above 2000 in dataframe2
         filter5 = self.dataframes[2]['Date'].dt.year >= 2000
         self.dataframes[2] = self.dataframes[2][filter5]

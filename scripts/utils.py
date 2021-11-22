@@ -1,8 +1,9 @@
 """This module implements utility functions for other modules."""
 import logging
 from pathlib import Path
-import yaml
 import sys
+import yaml
+
 
 
 def parse_config(config_file: str) -> dict:
