@@ -3,6 +3,7 @@ and visualization pipeline
 """
 
 from scripts.etl import ExchangeETL
+from scripts.plots import GeneratePlots
 from pathlib import Path
 import click
 
@@ -32,9 +33,14 @@ def etl(config_file: str) -> None:
         ETL = ExchangeETL(config_file)
         ETL.processing()
         logger.info("------ The ETL operations was terminated successfully -------")
+
     else:
         logger.info("The processed dataframe file already exists.")
-        logger.info("Verifying if the plots images file already exists.")
+        #logger.info("Verifying if the plots images file already exists.")
+        PLOT = GeneratePlots(config_file)
+        logger.info("Generating the plot1")
+        PLOT.plot_graph1()
+        logger.info("------- The plot1 was saved successfully --------")
         
 
     

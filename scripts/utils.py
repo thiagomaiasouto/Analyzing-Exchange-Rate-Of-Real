@@ -28,7 +28,7 @@ def set_logger(name: str, log_path: str) -> logging:
     """
     log_path = Path(log_path)
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    # create logger with __name__ 
+    # create logger with __name__
     logger = logging.getLogger(name)
 
     # configuring the logger level
