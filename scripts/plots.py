@@ -284,7 +284,7 @@ class GeneratePlots():
         self.logger.info("The covid-19 period was plotted.")
 
         # highlihting the peak of the crisis
-        axe.axvspan(xmin=737412.0, xmax=737602.0, ymin=0.03,
+        axe.axvspan(xmin=18300.0, xmax=18450.0, ymin=0.03,
                     alpha=0.3, color='grey')
         self.logger.info("The highlihting to the peak crisis was added.")
 
@@ -293,7 +293,7 @@ class GeneratePlots():
         axe.set_yticklabels([])
         self.logger.info("The separate tick labels was added.")
 
-        x_coord = 735945.0
+        x_coord = 16750.0
         for year in ['2016', '2017', '2018', '2019', '2020', '2021']:
             axe.text(x_coord, 2.75, year, alpha=0.5, fontsize=16)
             x_coord += 365
@@ -301,19 +301,15 @@ class GeneratePlots():
 
         y_coord = 3.05
         for rate in ['3.0', '4.0', '5.0', '6.0']:
-            axe.text(735800.0, y_coord, rate, alpha=0.5, fontsize=16)
+            axe.text(16700, y_coord, rate, alpha=0.5, fontsize=16)
             y_coord += 1.0
         self.logger.info("The y ticks was added.")
 
         # adding a title and a subtitle
-        axe.text(
-            735800.0,
-            6.67,
-            "Real-USD rate peaked at 5.88 during 2020's Covid crises",
-            weight='bold',
-            fontsize=18)
-        axe.text(735800, 6.40, 'Real-USD exchange rates between 2016 and 2021',
-                 size=16)
+        axe.text(17000.0, 6.25, "Real-USD rate peaked at 5.88 during 2020's Covid crises",
+                weight='bold', fontsize=18)
+        axe.text(17200, 6.10, 'Real-USD exchange rates between 2016 and 2021',
+                size=16)
         self.logger.info("The title and subtitle were added.")
 
         # exporting the second graph
