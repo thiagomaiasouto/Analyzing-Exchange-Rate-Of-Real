@@ -11,4 +11,3 @@ log:
 plots:
   plot1_path: "./visualizations/plot1.png"
   plot2_path: "./visualizations/plot2.png"
-  plot3_path: "./visualizations/plot3.png"

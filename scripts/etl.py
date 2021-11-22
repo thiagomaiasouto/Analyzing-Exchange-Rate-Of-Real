@@ -25,9 +25,9 @@ class ExchangeETL():
         This is the constructor of the class ExchangeETL
         and is responsible for initializing the attributes of the object.
         Args:
-        config_file [str]: path to the config yaml file
+            config_file (str): path to the config yaml file
         Returns:
-        None
+            None
         """
 
         # initializing the config_path attribute

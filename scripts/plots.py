@@ -25,6 +25,8 @@ class GeneratePlots():
     dilma: pd.DataFrame
     temer: pd.DataFrame
     bolsonaro: pd.DataFrame
+    selected: pd.DataFrame
+    covid: pd.DataFrame
 
     def __init__(self, config_path: str = "./config.yml") -> None:
         """
@@ -122,7 +124,7 @@ class GeneratePlots():
         self.logger.info("The plot style was changed to 'fivethirtyeight'.")
 
         # adding the subplots
-        plt.figure(figsize=(18, 8))
+        plt.figure(figsize=(12, 6))
         ax1 = plt.subplot(2, 5, 1)
         ax2 = plt.subplot(2, 5, 2)
         ax3 = plt.subplot(2, 5, 3)
@@ -239,3 +241,81 @@ class GeneratePlots():
         # exporting the first graph
         plt.savefig(self.config['plots']['plot1_path'])
         self.logger.info("The first graph was saved successfully.")
+
+    def plot_graph2_preprocessing(self) -> None:
+        """
+         This function is responsible to preprocess the Dataframe
+         for using it in the plot of BRL Exchange rate in covid 19 period
+        """
+
+        # obtaining the period of the plot
+        filter1 = self.dataframe['Date'].dt.year >= 2016
+        filter2 = self.dataframe['Date'].dt.year < 2021
+        self.selected = self.dataframe.copy()[filter1 & filter2]
+        self.logger.info("The period of plot was selected.")
+
+        # obtaining the period of the covid-19
+        filter3 = self.dataframe['Date'].dt.year >= 2019
+        self.covid = self.dataframe.copy()[filter3 & filter2]
+        self.logger.info("The period of covid-19 was selected.")
+
+    def plot_graph2(self) -> None:
+        """
+         This function is responsible to apply the preprocessing steps in
+         the Dataframe and for create and export the plot of BRL Exchange rate for covid-19
+        """
+
+        # preprocessing data
+        self.plot_graph2_preprocessing()
+
+        # adding the FiveThirtyEight style
+        style.use('fivethirtyeight')
+        self.logger.info("The plot style was changed to 'fivethirtyeight'.")
+
+        # adding the selected period to plot
+        _, axe = plt.subplots(figsize=(12, 6))
+        axe.plot(self.selected['Date'], self.selected['BRL'],
+                 linewidth=1, color='#A6D785')
+        self.logger.info("The selected period was plotted.")
+
+        # adding the covid-19 period to plot
+        axe.plot(self.covid['Date'], self.covid['BRL'],
+                 linewidth=3, color='#e23d28')
+        self.logger.info("The covid-19 period was plotted.")
+
+        # highlihting the peak of the crisis
+        axe.axvspan(xmin=737412.0, xmax=737602.0, ymin=0.03,
+                    alpha=0.3, color='grey')
+        self.logger.info("The highlihting to the peak crisis was added.")
+
+        # adding separete tick labels
+        axe.set_xticklabels([])
+        axe.set_yticklabels([])
+        self.logger.info("The separate tick labels was added.")
+
+        x_coord = 735945.0
+        for year in ['2016', '2017', '2018', '2019', '2020', '2021']:
+            axe.text(x_coord, 2.75, year, alpha=0.5, fontsize=16)
+            x_coord += 365
+        self.logger.info("The x ticks was added.")
+
+        y_coord = 3.05
+        for rate in ['3.0', '4.0', '5.0', '6.0']:
+            axe.text(735800.0, y_coord, rate, alpha=0.5, fontsize=16)
+            y_coord += 1.0
+        self.logger.info("The y ticks was added.")
+
+        # adding a title and a subtitle
+        axe.text(
+            735800.0,
+            6.67,
+            "Real-USD rate peaked at 5.88 during 2020's Covid crises",
+            weight='bold',
+            fontsize=18)
+        axe.text(735800, 6.40, 'Real-USD exchange rates between 2016 and 2021',
+                 size=16)
+        self.logger.info("The title and subtitle were added.")
+
+        # exporting the second graph
+        plt.savefig(self.config['plots']['plot2_path'])
+        self.logger.info("The second graph was saved successfully.")
