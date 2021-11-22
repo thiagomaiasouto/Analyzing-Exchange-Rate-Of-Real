@@ -3,7 +3,10 @@ and visualization pipeline
 """
 
 from scripts.etl import ExchangeETL
+from pathlib import Path
 import click
+
+from scripts.utils import parse_config, set_logger
 
 
 
@@ -17,9 +20,24 @@ def etl(config_file: str) -> None:
     Returns:
         None
     """
-    #ETL = ExchangeETL(config_file)
-    click.echo(f"O arquivo {config_file} foi carregado com sucesso.")
-    #ETL.processing()
+    config = parse_config(config_file)
+    
+    logger = set_logger("run", config['log']['log_run_path'])
+
+    processed_data = Path(config['etl']['processed_path'])
+
+    logger.info("Verifying if the processed dataframe file is already exists.")
+    if processed_data.is_file() is False:
+        logger.info("The processed dataframe file doesn'exist, so the ETL will be performed.")
+        ETL = ExchangeETL(config_file)
+        ETL.processing()
+        logger.info("------ The ETL operations was terminated successfully -------")
+    else:
+        logger.info("The processed dataframe file already exists.")
+        logger.info("Verifying if the plots images file already exists.")
+        
+
+    
 
     
 

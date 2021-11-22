@@ -1,9 +1,12 @@
 etl:
-  raw_data_path: "./data/autos.csv"
-  processed_path: "./data"
+  dataframe1_path: "./data/ECB_FX_USD-base.csv"
+  dataframe2_path: "./data/Foreign_Exchange_Rates.csv"
+  processed_path: "./data/processed_data.csv"
 
 log:
-  log_path : "./log/etl.log"
+  log_etl_path: "./log/etl.log"
+  log_plot_path: "./log/plots.log"
+  log_run_path: "./log/run.log"
 
 plots:
   plot1_path: "./visualizations/plot1.png"

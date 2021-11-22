@@ -18,7 +18,7 @@ def parse_config(config_file: str) -> dict:
     return config
 
 
-def set_logger(log_path: str) -> logging:
+def set_logger(name: str, log_path: str) -> logging:
     """
     This function configure a logger
     Args:
@@ -29,7 +29,7 @@ def set_logger(log_path: str) -> logging:
     log_path = Path(log_path)
     log_path.parent.mkdir(parents=True, exist_ok=True)
     # create logger with __name__ 
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger(name)
 
     # configuring the logger level
     logger.setLevel(logging.INFO)
@@ -56,6 +56,4 @@ def set_logger(log_path: str) -> logging:
     # adding the console handler to the logger
     logger.addHandler(console_handler)
 
-    # logs that logger configuration is finished
-    logger.info("Finished logger configuration!")
     return logger
