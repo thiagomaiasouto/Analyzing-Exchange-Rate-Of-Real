@@ -79,6 +79,7 @@ This repository contains a data analysis tool that perform ETL operations and pr
     ├── plots.py                
     └── utils.py
 
+```
 ## Authors
 - [Arthur Cunha](https://github.com/arthurfpcl22)
 - [Thiago Maia](https://github.com/thiagomaiasouto)
