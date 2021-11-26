@@ -138,8 +138,8 @@ class GeneratePlots():
         # applying changed to all subplots
         for axe in axes:
             axe.set_ylim(0.5, 2.0)
-            axe.set_yticks([1.0, 2.0, 3.5, 5.0, 6.0])
-            axe.set_yticklabels(['1.0', '2.0', '3.5', '5.0', '6.0'],
+            axe.set_yticks([1.0, 2.0, 3.5, 5.0, 7.0])
+            axe.set_yticklabels(['1.0', '2.0', '3.5', '5.0', '7.0'],
                                 alpha=0.3)
             axe.set_xticklabels([])
             axe.grid(alpha=0.5)
@@ -151,41 +151,43 @@ class GeneratePlots():
                  color='#BF5FFF')
         ax1.set_xticklabels(
             ['', '2000', '', '', '', '2001', '', '', '', '2002'], alpha=0.3)
-        ax1.text(730380.0, 6.3, '(2000-2002)', weight='bold',
-                 alpha=0.3)
+        ax1.text(11300.0, 6.4, 'FHC', fontsize=18, weight='bold',
+                color='#BF5FFF')
+        ax1.text(11050.0, 5.8, '(2000-2002)', weight='bold',
+                alpha=0.3)
         self.logger.info("The FHC plot was created.")
 
         # ax2: LULA
         ax2.plot(self.lula['Date'], self.lula['BRL'],
                  color='#ffa500')
-        ax2.set_xticklabels(['', '2002', '', '2004', '', '2006', '',
-                            '2008', '', '2010'], alpha=0.3)
-        ax2.text(732288.0, 6.92, 'LULA', fontsize=18, weight='bold',
+        ax2.set_xticklabels(['', '2002', '', '', '', '2006', '',
+                     '', '', '2010'], alpha=0.3)
+        ax2.text(13000.0, 6.4, 'LULA', fontsize=18, weight='bold',
                  color='#ffa500')
-        ax2.text(732038.0, 6.3, '(2003-2008)', weight='bold',
-                 alpha=0.3)
+        ax2.text(12400.0, 5.8, '(2003-2008)', weight='bold',
+                alpha=0.3)
         self.logger.info("The LULA plot was created.")
 
         # ax3: DILMA
         ax3.plot(self.dilma['Date'], self.dilma['BRL'],
                  color='#646464')
         ax3.set_xticklabels(['', '2010', '', '', '2013', '',
-                             '', '', '2016'], alpha=0.3)
-        ax3.text(734705.0, 6.92, 'DILMA', fontsize=18, weight='bold',
+                            '', '', '2016'], alpha=0.3)
+        ax3.text(15100.0, 6.4, 'DILMA', fontsize=18, weight='bold',
                  color='#646464')
-        ax3.text(734485.0, 6.3, '(2011-2016)', weight='bold',
-                 alpha=0.3)
+        ax3.text(14800.0, 5.8, '(2011-2016)', weight='bold',
+                alpha=0.3)
         self.logger.info("The DILMA plot was created.")
 
         # ax4: TEMER
         ax4.plot(self.temer['Date'], self.temer['BRL'],
                  color='#86BE3C')
         ax4.set_xticklabels(['', '2017', '', '',
-                             '', '2018', ''], alpha=0.3)
-        ax4.text(736445.0, 6.92, 'TEMER', fontsize=18, weight='bold',
-                 color='#86BE3C')
-        ax4.text(736420.0, 6.3, '(2017-2018)', weight='bold',
-                 alpha=0.3)
+                            '', '2018', ''], alpha=0.3)
+        ax4.text(17240.0, 6.4, 'TEMER', fontsize=18, weight='bold',
+                color='#86BE3C')
+        ax4.text(17200.0, 5.8, '(2017-2018)', weight='bold',
+                alpha=0.3)
         self.logger.info("The TEMER plot was created.")
 
         # ax5: BOLSONARO
@@ -193,9 +195,9 @@ class GeneratePlots():
                  color='#C33734')
         ax5.set_xticklabels(['', '2019', '', '', '2020', '', '', '2021', ''],
                             alpha=0.3)
-        ax5.text(737000.0, 6.92, 'BOLSONARO', fontsize=18, weight='bold',
-                 color='#00B2EE')
-        ax5.text(737100.0, 6.3, '(2019-2021)', weight='bold',
+        ax5.text(17500.0, 6.4, 'BOLSONARO', fontsize=18, weight='bold',
+                color='#00B2EE')
+        ax5.text(17700.0, 5.8, '(2019-2021)', weight='bold',
                  alpha=0.3)
         self.logger.info("The BOLSONARO plot was created.")
 
@@ -215,27 +217,17 @@ class GeneratePlots():
         self.logger.info("The plot with all presidents was created.")
 
         # addind the title and subtitle
-        ax1.text(730016.0, 9.35, "COTAÇÃO USD-REAL ENTRE 2000-2021",
-                 fontsize=20, weight='bold')
-        ax1.text(
-            730016.0,
-            8.14,
-            """EURO-USD taxas de câmbio para o governo FHC (2000 - 2002), LULA (2002-2010),
-                Dilma (2010-2016), Temer(2017-2018), Bolsonaro(2018-2021)""",
-            fontsize=16)
+        ax1.text(10500.0, 8.3, 'COTAÇÃO USD-REAL ENTRE 2000-2021',
+                fontsize=14, weight='bold')
+        ax1.text(10500.0, 7.3, '''USD-REAL taxas de câmbio para o governo FHC (2000 - 2002), LULA (2002-2010),
+                Dilma (2010-2016), Temer(2017-2018), Bolsonaro(2018-2021)''',
+                fontsize=10)
         self.logger.info("The title and subtitle were added to the plot.")
 
         # adding a signature
-        ax6.text(
-            729916.0,
-            0.65,
-            "DCA0305" +
-            " " *
-            190 +
-            "Arthur França/Thiago Maia",
-            color='#f0f0f0',
-            backgroundcolor='#4d4d4d',
-            size=14)
+        ax6.text(10500.0, 0.05, 'DCA0305' + ' ' * 110 + 'Arthur França/Thiago Maia',
+                color='#f0f0f0', backgroundcolor='#4d4d4d',
+                size=14)
         self.logger.info("The signature was added to the plot.")
 
         # exporting the first graph
